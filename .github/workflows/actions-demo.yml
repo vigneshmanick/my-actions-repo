@@ -1,0 +1,27 @@
+name: GitHub Actions Demo
+on: 
+  push:
+    branches: 
+      - main
+    paths-ignore:
+      - .github
+  pull_request:
+    branches: 
+      - main
+  schedule:
+    - cron: 15 6 * * SUN
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          echo ${{ github.event_name }}
+          echo ${{ github.ref }}
+      - name: List Files
+        run: |
+          echo ${{ github.repository }}
+          ls -l
+
